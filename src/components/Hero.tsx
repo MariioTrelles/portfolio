@@ -2,26 +2,24 @@ type HeroProps = {
   name: string;
   role: string;
   summary: string;
-  primaryLink: string;
   secondaryLink: string;
 };
 
-function Hero({ name, role, summary, primaryLink, secondaryLink }: HeroProps) {
+function Hero({ name, role, summary, secondaryLink }: HeroProps) {
+  const profileImage = `${import.meta.env.BASE_URL}images/nocheColiseo1.jpg`;
+
   return (
     <section className="hero section" id="inicio">
       <div className="container hero-grid">
         <div className="hero-copy reveal">
-          <p className="eyebrow">Portfolio profesional</p>
+          <p className="eyebrow">Software developer</p>
           <h1>{name}</h1>
           <p className="hero-role">{role}</p>
           <p className="hero-summary">{summary}</p>
 
           <div className="hero-actions">
-            <a className="button button-primary" href={primaryLink}>
-              Ver proyectos
-            </a>
             <a
-              className="button button-secondary"
+              className="button button-primary"
               href={secondaryLink}
               target="_blank"
               rel="noreferrer"
@@ -32,25 +30,18 @@ function Hero({ name, role, summary, primaryLink, secondaryLink }: HeroProps) {
         </div>
 
         <div className="hero-panel reveal reveal-delay">
-          <div className="terminal-card" aria-label="Resumen técnico">
-            <div className="terminal-top">
+          <div className="profile-card">
+            <div className="profile-window-bar" aria-hidden="true">
               <span />
               <span />
               <span />
             </div>
-            <div className="terminal-body">
-              <p>
-                <span className="terminal-prompt">$</span> perfil --estado
-              </p>
-              <p>Estudiante finalizando Ingeniería Informática del Software</p>
-              <p>
-                <span className="terminal-prompt">$</span> intereses --listar
-              </p>
-              <p>software, web, bases de datos, Git, Docker, despliegue</p>
-              <p>
-                <span className="terminal-prompt">$</span> objetivo --actual
-              </p>
-              <p>Prácticas o primera experiencia profesional</p>
+            <div className="profile-image-wrap">
+              <img src={profileImage} alt={name} />
+              <div className="profile-overlay">
+                <p>{name}</p>
+                <span>{role}</span>
+              </div>
             </div>
           </div>
         </div>

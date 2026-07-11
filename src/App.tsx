@@ -4,12 +4,13 @@ import Footer from './components/Footer';
 import About from './sections/About';
 import Skills from './sections/Skills';
 import Projects from './sections/Projects';
-import CV from './sections/CV';
-import Contact from './sections/Contact';
+import Training from './sections/Training';
 import { personalInfo } from './data/personal';
 import { personalProjects, universityProjects } from './data/projects';
 
 function App() {
+  const cvPath = `${import.meta.env.BASE_URL}cv/CV_Mario_Trelles.pdf`;
+
   return (
     <div className="app-shell">
       <Header />
@@ -18,27 +19,25 @@ function App() {
           name={personalInfo.name}
           role={personalInfo.role}
           summary={personalInfo.summary}
-          primaryLink="#projects"
-          secondaryLink="/cv/Mario_Trelles_CV.pdf"
+          secondaryLink={cvPath}
         />
         <About />
         <Skills />
         <Projects
           id="projects-university"
-          eyebrow="Experiencia Académica"
+          eyebrow="Experiencia académica"
           title="Proyectos universitarios"
           intro="Una selección de trabajos que reflejan una base sólida en ingeniería del software, desarrollo web, datos y despliegue."
           projects={universityProjects}
         />
         <Projects
           id="projects"
-          eyebrow="Iniciativa Personal"
+          eyebrow="Iniciativa personal"
           title="Proyectos personales"
           intro="Pequeños proyectos orientados a seguir aprendiendo, construir presencia profesional y aplicar buenas prácticas fuera del aula."
           projects={personalProjects}
         />
-        <CV />
-        <Contact />
+        <Training />
       </main>
       <Footer />
     </div>

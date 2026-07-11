@@ -1,51 +1,56 @@
 export type Project = {
   title: string;
+  subject?: string;
   description: string;
   stack: string[];
-  context: string;
   linkLabel?: string;
   linkHref?: string;
 };
 
 export const universityProjects: Project[] = [
   {
-    title: 'Java/JDBC Layered App',
+    title: 'Yovi - Game Y at UniOvi',
+    subject: 'Arquitectura del Software',
     description:
-      'Proyecto académico construido con arquitectura por capas para separar dominio, persistencia y lógica de aplicación. Incluye acceso a base de datos con JDBC, consultas SQL y gestión del proyecto con Maven y Git.',
-    stack: ['Java', 'JDBC', 'SQL', 'Maven', 'Git'],
-    context: 'Proyecto universitario',
+      'Proyecto universitario desarrollado en equipo de 5 personas. Aplicación con arquitectura por servicios, frontend en React, backend Node/Express, motor de juego en Rust, Docker, tests y despliegue/documentación asociados.',
+    stack: ['React', 'TypeScript', 'Node.js', 'Express', 'Rust', 'Docker'],
+    linkLabel: 'Ver repositorio',
+    linkHref: 'https://github.com/Arquisoft/yovi_es5c',
   },
   {
-    title: 'Servlets/JSP Web App',
+    title: 'BookSpace - Spring Reservation System',
+    subject: 'Sistemas Distribuidos e Internet',
     description:
-      'Aplicación web académica orientada a comprender el ciclo de petición-respuesta en Java web, uso de sesiones, JSTL y organización bajo patrón MVC con vistas JSP y controladores basados en Servlets.',
-    stack: ['Java', 'Servlets', 'JSP', 'JSTL', 'MVC'],
-    context: 'Proyecto universitario',
+      'Aplicación web desarrollada en equipo con Spring Boot para gestionar espacios y reservas. Incluye autenticación, roles, entidades JPA, repositorios, servicios, vistas Thymeleaf, validación, internacionalización y tests.',
+    stack: ['Java', 'Spring Boot', 'JPA', 'Thymeleaf', 'Security', 'Maven'],
+    linkLabel: 'Ver repositorio',
+    linkHref: 'https://github.com/MariioTrelles/sdi-bookspace-spring',
   },
   {
-    title: 'Docker/Azure Deployment Project',
+    title: 'CPM Pizzeria',
+    subject: 'Comunicación Persona Máquina',
     description:
-      'Trabajo enfocado en contenedores, configuración de servicios y despliegue básico. Sirvió para entender entornos reproducibles, nociones de cloud y fundamentos prácticos de entrega de aplicaciones.',
-    stack: ['Docker', 'Azure', 'Linux', 'Deployment', 'Networking'],
-    context: 'Proyecto universitario',
+      'Proyecto individual de escritorio desarrollado en Java Swing para gestionar pedidos de una pizzería. Incluye carta por categorías, carrito, reservas, confirmación de pedidos, persistencia en ficheros y un minijuego integrado.',
+    stack: ['Java', 'Swing', 'JavaHelp', 'POO', 'Ficheros'],
+    linkLabel: 'Ver repositorio',
+    linkHref: 'https://github.com/MariioTrelles/cpm-pizzeria-java',
   },
   {
-    title: 'Database Design Project',
+    title: 'MotoGP-Desktop',
+    subject: 'Software y Estándares para la Web',
     description:
-      'Proyecto centrado en modelado relacional y persistencia, con definición de esquemas, consultas SQL y exploración de soluciones NoSQL para comparar enfoques de almacenamiento y acceso a datos.',
-    stack: ['SQL', 'MongoDB', 'Data Modeling', 'Normalization', 'Persistence'],
-    context: 'Proyecto universitario',
+      'Proyecto individual centrado en desarrollo web frontend, maquetación responsive, validación de estándares web y trabajo con contenidos estructurados dentro de la asignatura de Software y Estándares para la Web.',
+    stack: ['HTML', 'CSS', 'JavaScript', 'XML', 'XSD'],
+    linkLabel: 'Ver repositorio',
+    linkHref: 'https://github.com/MariioTrelles/sew-web',
   },
 ];
 
 export const personalProjects: Project[] = [
   {
-    title: 'Personal Portfolio',
+    title: 'Próximamente',
     description:
-      'Este portfolio personal diseñado para presentar mi perfil, mis proyectos y mi orientación profesional de forma clara, moderna y fácil de compartir en GitHub, LinkedIn y candidaturas.',
-    stack: ['React', 'Vite', 'TypeScript', 'CSS', 'GitHub Pages'],
-    context: 'Proyecto personal',
-    linkLabel: 'Ver sección',
-    linkHref: '#inicio',
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Esta sección queda reservada para futuros proyectos personales.',
+    stack: ['Pendiente'],
   },
 ];

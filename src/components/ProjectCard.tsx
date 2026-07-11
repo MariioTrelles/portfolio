@@ -1,24 +1,24 @@
 type ProjectCardProps = {
   title: string;
+  subject?: string;
   description: string;
   stack: string[];
-  context: string;
   linkLabel?: string;
   linkHref?: string;
 };
 
 function ProjectCard({
   title,
+  subject,
   description,
   stack,
-  context,
   linkLabel,
   linkHref,
 }: ProjectCardProps) {
   return (
     <article className="project-card reveal">
       <div className="project-card-top">
-        <span className="project-context">{context}</span>
+        {subject ? <span className="project-subject">{subject}</span> : null}
         <h3>{title}</h3>
       </div>
 

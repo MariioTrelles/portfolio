@@ -4,8 +4,7 @@ const navItems = [
   { label: 'Tecnologías', href: '#tecnologias' },
   { label: 'Proyectos universitarios', href: '#projects-university' },
   { label: 'Proyectos personales', href: '#projects' },
-  { label: 'CV', href: '#cv' },
-  { label: 'Contacto', href: '#contacto' },
+  { label: 'Formación', href: '#formacion' },
 ];
 
 function Header() {
@@ -13,7 +12,7 @@ function Header() {
     <header className="site-header">
       <div className="container header-content">
         <a className="brand" href="#inicio" aria-label="Ir al inicio">
-          <span className="brand-mark">&lt;/&gt;</span>
+          <span className="brand-mark">MT</span>
           <span>Mario Trelles</span>
         </a>
 
