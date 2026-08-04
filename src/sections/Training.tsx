@@ -9,7 +9,13 @@ type TrainingProps = {
 };
 
 function Training({ chapterIndex }: TrainingProps) {
-  const left = <SectionTitle title="Cursos y certificaciones" />;
+  const left = (
+    <SectionTitle
+      index={chapterIndex}
+      title="Cursos y certificaciones"
+      description="Formación complementaria fuera del plan de estudios, centrada en herramientas y tendencias actuales del sector. Una forma de seguir ampliando conocimientos más allá de lo académico."
+    />
+  );
 
   const right = (
     <div className="chapter-list">

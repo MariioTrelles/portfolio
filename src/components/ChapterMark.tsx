@@ -9,7 +9,7 @@ function ChapterMark({ index, label }: ChapterMarkProps) {
   return (
     <div className="chapter-mark" aria-hidden="true">
       <span className="chapter-mark-index">{number}</span>
-      <span className="chapter-mark-sep">·</span>
+      <span className="chapter-mark-sep"> · </span>
       <span className="chapter-mark-label">{label}</span>
     </div>
   );

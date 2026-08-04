@@ -10,11 +10,12 @@ type ProjectsProps = {
   chapterLabel: string;
   title: string;
   intro: string;
+  stats?: string;
   projects: Project[];
 };
 
-function Projects({ chapterIndex, id, chapterLabel, title, intro, projects }: ProjectsProps) {
-  const left = <SectionTitle title={title} description={intro} />;
+function Projects({ chapterIndex, id, chapterLabel, title, intro, stats, projects }: ProjectsProps) {
+  const left = <SectionTitle index={chapterIndex} title={title} description={intro} stats={stats} />;
 
   const right = (
     <div className="chapter-list">

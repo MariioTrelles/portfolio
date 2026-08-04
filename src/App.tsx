@@ -2,6 +2,7 @@ import { useMemo } from 'react';
 import BookmarkRail from './components/BookmarkRail';
 import ChapterNav from './components/ChapterNav';
 import PageDeck from './components/PageDeck';
+import SocialLinks from './components/SocialLinks';
 import Cover from './sections/Cover';
 import Skills from './sections/Skills';
 import Projects from './sections/Projects';
@@ -47,7 +48,8 @@ function App() {
             id="projects-university"
             chapterLabel="Proyectos universitarios"
             title="Proyectos universitarios"
-            intro="Una selección de trabajos que reflejan una base sólida en ingeniería del software, desarrollo web, datos y despliegue."
+            intro="Una selección de trabajos que reflejan una base sólida en ingeniería del software, desarrollo web, datos y despliegue. Incluyen tanto desarrollos en equipo como proyectos individuales a lo largo del grado."
+            stats="4 proyectos · individuales y en equipo"
             projects={universityProjects}
           />
         ),
@@ -60,7 +62,7 @@ function App() {
             id="projects"
             chapterLabel="Proyectos personales"
             title="Proyectos personales"
-            intro="Pequeños proyectos orientados a seguir aprendiendo, construir presencia profesional y aplicar buenas prácticas fuera del aula."
+            intro="Pequeños proyectos orientados a seguir aprendiendo, construir presencia profesional y aplicar buenas prácticas fuera del aula. Un espacio que iré ampliando según vaya cerrando nuevas ideas."
             projects={personalProjects}
           />
         ),
@@ -72,17 +74,21 @@ function App() {
 
   return (
     <div className="app-shell">
-      <a
-        className="brand-mark brand-mark-corner"
-        href={`#${CHAPTER_IDS[0]}`}
-        aria-label="Ir al inicio"
-        onClick={(event) => {
-          event.preventDefault();
-          pager.goTo(0);
-        }}
-      >
-        MT
-      </a>
+      <div className="top-left-nav">
+        <a
+          className="brand-mark brand-mark-corner"
+          href={`#${CHAPTER_IDS[0]}`}
+          aria-label="Ir al inicio"
+          onClick={(event) => {
+            event.preventDefault();
+            pager.goTo(0);
+          }}
+        >
+          MT
+        </a>
+        <BookmarkRail items={CHAPTER_META} activeIndex={pager.activeIndex} onSelect={pager.goTo} />
+      </div>
+      <SocialLinks github={personalInfo.github} linkedin={personalInfo.linkedin} cvHref={cvPath} />
       <main>
         <PageDeck
           chapters={chapters}
@@ -93,7 +99,6 @@ function App() {
           onExitComplete={pager.onTransitionEnd}
         />
       </main>
-      <BookmarkRail items={CHAPTER_META} activeIndex={pager.activeIndex} onSelect={pager.goTo} />
       <ChapterNav
         activeIndex={pager.activeIndex}
         count={chapters.length}

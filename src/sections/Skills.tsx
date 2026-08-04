@@ -57,10 +57,14 @@ type SkillsProps = {
 };
 
 function Skills({ chapterIndex }: SkillsProps) {
+  const totalSkills = skillGroups.reduce((count, group) => count + group.items.length, 0);
+
   const left = (
     <SectionTitle
+      index={chapterIndex}
       title="Tecnologías y herramientas"
-      description="Tecnologías y conceptos que ya he trabajado durante el grado y que quiero seguir consolidando en un entorno profesional."
+      description="Tecnologías y conceptos que ya he trabajado durante el grado y que quiero seguir consolidando en un entorno profesional. Abarcan desde el lenguaje y la arquitectura hasta el testing y el despliegue, con especial interés en las buenas prácticas."
+      stats={`+50 tecnologías`}
     />
   );
 

@@ -11,6 +11,7 @@
   -moz-osx-font-smoothing: grayscale;
   --font-sans: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
   --font-display: "Playfair Display Variable", "Playfair Display", Georgia, serif;
+  --font-mono: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
   --bg: #070605;
   --bg-elevated: rgba(20, 18, 15, 0.9);
   --bg-card: rgba(19, 17, 14, 0.92);
@@ -123,7 +124,7 @@ a {
   }
 
   .section.chapter {
-    padding: 0;
+    padding: 1.5rem 0 0;
   }
 }
 
@@ -150,14 +151,22 @@ a {
   background: linear-gradient(90deg, var(--border-strong), transparent);
 }
 
-.chapter-mark-index,
+.chapter-mark-index {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  font-size: 1rem;
+  letter-spacing: 0.08em;
+  color: var(--accent-strong);
+  white-space: nowrap;
+}
+
 .chapter-mark-label {
   font-family: var(--font-display);
   font-style: italic;
   font-size: 1.15rem;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: var(--accent-strong);
+  color: var(--muted);
   white-space: nowrap;
 }
 
@@ -165,10 +174,6 @@ a {
   font-family: var(--font-display);
   font-style: italic;
   font-size: 1.15rem;
-  color: var(--muted);
-}
-
-.chapter-mark-label {
   color: var(--muted);
 }
 
@@ -214,13 +219,7 @@ a {
   transform: translateX(-50%);
   z-index: 0;
   pointer-events: none;
-  background: linear-gradient(
-    180deg,
-    transparent,
-    var(--border-strong) 12%,
-    var(--border-strong) 88%,
-    transparent
-  );
+  background: var(--border-strong);
 }
 
 .chapter-spread-half {
@@ -237,7 +236,6 @@ a {
   justify-content: flex-start;
   gap: 1.75rem;
   padding-inline: 0.25rem;
-  mask-image: linear-gradient(180deg, transparent, black 16px, black calc(100% - 16px), transparent);
 }
 
 .chapter-spread-half--center {
@@ -272,11 +270,32 @@ a {
   margin-bottom: 2.5rem;
 }
 
+.section-heading-index {
+  display: block;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: clamp(3.5rem, 7vw, 5.5rem);
+  line-height: 1;
+  color: var(--accent);
+  opacity: 0.16;
+  margin-bottom: 0.75rem;
+  user-select: none;
+}
+
 .section-heading h2 {
   margin: 0;
   line-height: 1.05;
   font-family: var(--font-display);
   font-size: clamp(2rem, 4vw, 3rem);
+}
+
+.section-stats {
+  margin: 1.25rem 0 0;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--accent-strong);
 }
 
 .section-description,
@@ -305,11 +324,18 @@ a {
 }
 
 .brand-mark-corner {
+  cursor: pointer;
+  flex: 0 0 auto;
+}
+
+.top-left-nav {
   position: fixed;
   top: clamp(1rem, 3vh, 1.5rem);
   left: clamp(1rem, 3vw, 1.5rem);
   z-index: 20;
-  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
 }
 
 .hero-role {
@@ -407,7 +433,7 @@ a {
 
 .profile-card {
   position: relative;
-  width: min(100%, 340px);
+  width: min(100%, 340px, 34vh);
   overflow: hidden;
   outline: 1px solid rgba(255, 173, 50, 0.16);
 }
@@ -742,13 +768,14 @@ a {
 
 .chapter-nav {
   position: fixed;
-  left: 50%;
-  bottom: clamp(1rem, 4vh, 2rem);
-  transform: translateX(-50%);
+  top: 50%;
+  left: clamp(1rem, 3vw, 1.5rem);
+  right: clamp(1rem, 3vw, 1.5rem);
+  transform: translateY(-50%);
   z-index: 15;
   display: flex;
-  flex-direction: row;
-  gap: 0.75rem;
+  justify-content: space-between;
+  pointer-events: none;
 }
 
 .chapter-nav-btn {
@@ -763,6 +790,7 @@ a {
   color: var(--accent-strong);
   box-shadow: var(--shadow);
   cursor: pointer;
+  pointer-events: auto;
 }
 
 .chapter-nav-btn:hover,
@@ -777,13 +805,8 @@ a {
 }
 
 .bookmark-rail {
-  position: fixed;
-  top: 50%;
-  left: 0;
-  transform: translateY(-50%);
-  z-index: 20;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: 0.4rem;
 }
 
@@ -815,8 +838,9 @@ a {
 }
 
 .bookmark-tab-index {
-  font-family: var(--font-display);
-  font-style: italic;
+  font-family: var(--font-mono);
+  font-weight: 600;
+  letter-spacing: 0.04em;
   opacity: 0.75;
   flex: 0 0 auto;
 }
@@ -837,7 +861,46 @@ a {
   opacity: 1;
 }
 
+.social-links {
+  position: fixed;
+  top: clamp(1rem, 3vh, 1.5rem);
+  right: clamp(1rem, 3vw, 1.5rem);
+  z-index: 20;
+  display: flex;
+  gap: 0.6rem;
+}
+
+.social-link {
+  display: inline-grid;
+  place-items: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: rgba(20, 18, 15, 0.78);
+  backdrop-filter: blur(10px);
+  color: var(--accent-strong);
+  box-shadow: var(--shadow);
+  cursor: pointer;
+}
+
+.social-link svg {
+  width: 1.05rem;
+  height: 1.05rem;
+}
+
+.social-link:hover,
+.social-link:focus-visible {
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-strong) 100%);
+  color: #201207;
+  transform: translateY(-2px);
+}
+
 @media (max-width: 920px) {
+  .chapter-nav {
+    display: none;
+  }
+
   .skills-groups,
   .chapter-spread,
   .footer-content {
@@ -853,7 +916,6 @@ a {
 
   .chapter-spread-half {
     overflow-y: visible;
-    mask-image: none;
     padding-block: 1.5rem;
   }
 
@@ -887,5 +949,37 @@ a {
 
   .profile-card {
     width: 100%;
+  }
+}
+
+@media (max-width: 430px) {
+  .top-left-nav,
+  .social-links {
+    gap: 0.35rem;
+  }
+
+  .brand-mark-corner {
+    width: 1.9rem;
+    height: 1.9rem;
+    font-size: 0.68rem;
+  }
+
+  .bookmark-rail {
+    gap: 0.2rem;
+  }
+
+  .bookmark-tab {
+    padding: 0.35rem 0.4rem;
+    font-size: 0.72rem;
+  }
+
+  .social-link {
+    width: 1.9rem;
+    height: 1.9rem;
+  }
+
+  .social-link svg {
+    width: 0.9rem;
+    height: 0.9rem;
   }
 }
