@@ -1,13 +1,17 @@
 import { useRef } from 'react';
+import ChapterMark from '../components/ChapterMark';
+import ChapterSpread from '../components/ChapterSpread';
+import Reveal from '../components/Reveal';
 import SectionTitle from '../components/SectionTitle';
 import TechBadge from '../components/TechBadge';
 import { skillGroups, type SkillGroup } from '../data/skills';
 
 type SkillRailProps = {
   group: SkillGroup;
+  delay?: number;
 };
 
-function SkillRail({ group }: SkillRailProps) {
+function SkillRail({ group, delay }: SkillRailProps) {
   const railRef = useRef<HTMLDivElement>(null);
 
   const scrollRail = (direction: -1 | 1) => {
@@ -18,14 +22,22 @@ function SkillRail({ group }: SkillRailProps) {
   };
 
   return (
-    <article className="skill-group skill-rail-group reveal">
+    <Reveal as="article" className="skill-group skill-rail-group" delay={delay}>
       <div className="skill-rail-header">
         <h3>{group.title}</h3>
         <div className="skill-rail-controls" aria-label={`Controles de ${group.title}`}>
-          <button type="button" aria-label={`Ver tecnologías anteriores de ${group.title}`} onClick={() => scrollRail(-1)}>
+          <button
+            type="button"
+            aria-label={`Ver tecnologías anteriores de ${group.title}`}
+            onClick={() => scrollRail(-1)}
+          >
             &lt;
           </button>
-          <button type="button" aria-label={`Ver más tecnologías de ${group.title}`} onClick={() => scrollRail(1)}>
+          <button
+            type="button"
+            aria-label={`Ver más tecnologías de ${group.title}`}
+            onClick={() => scrollRail(1)}
+          >
             &gt;
           </button>
         </div>
@@ -36,26 +48,34 @@ function SkillRail({ group }: SkillRailProps) {
           <TechBadge key={item} name={item} />
         ))}
       </div>
-    </article>
+    </Reveal>
   );
 }
 
-function Skills() {
-  return (
-    <section className="section" id="tecnologias">
-      <div className="container">
-        <SectionTitle
-          eyebrow="Tecnologías"
-          title="Tecnologías y herramientas"
-          description="Tecnologías y conceptos que ya he trabajado durante el grado y que quiero seguir consolidando en un entorno profesional."
-        />
+type SkillsProps = {
+  chapterIndex: number;
+};
 
-        <div className="skills-groups">
-          {skillGroups.map((group) => (
-            <SkillRail group={group} key={group.title} />
-          ))}
-        </div>
-      </div>
+function Skills({ chapterIndex }: SkillsProps) {
+  const left = (
+    <SectionTitle
+      title="Tecnologías y herramientas"
+      description="Tecnologías y conceptos que ya he trabajado durante el grado y que quiero seguir consolidando en un entorno profesional."
+    />
+  );
+
+  const right = (
+    <div className="skills-groups">
+      {skillGroups.map((group, index) => (
+        <SkillRail group={group} key={group.title} delay={Math.min(index * 0.06, 0.3)} />
+      ))}
+    </div>
+  );
+
+  return (
+    <section className="section chapter" id="tecnologias">
+      <ChapterMark index={chapterIndex} label="Habilidades y tecnologías" />
+      <ChapterSpread left={left} right={right} leftClassName="chapter-spread-half--center" />
     </section>
   );
 }

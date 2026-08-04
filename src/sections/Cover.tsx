@@ -1,0 +1,59 @@
+import ChapterMark from '../components/ChapterMark';
+import ChapterSpread from '../components/ChapterSpread';
+import ProfilePanel from '../components/ProfilePanel';
+import Reveal from '../components/Reveal';
+import { personalInfo } from '../data/personal';
+
+type CoverProps = {
+  chapterIndex: number;
+  name: string;
+  role: string;
+  summary: string;
+  secondaryLink: string;
+};
+
+function Cover({ chapterIndex, name, role, summary, secondaryLink }: CoverProps) {
+  const left = <ProfilePanel name={name} role={role} />;
+
+  const right = (
+    <>
+      <Reveal className="hero-copy">
+        <p className="eyebrow">Software developer</p>
+        <p className="hero-summary">{summary}</p>
+        <div className="hero-actions">
+          <a className="button button-primary" href={secondaryLink} target="_blank" rel="noreferrer">
+            Descargar CV
+          </a>
+        </div>
+      </Reveal>
+
+      <Reveal as="article" className="info-card" delay={0.15}>
+        <ul className="detail-list">
+          <li>
+            <strong>Ubicación:</strong> {personalInfo.location}
+          </li>
+          <li>
+            <strong>Objetivo:</strong> prácticas o primera experiencia laboral
+          </li>
+          <li>
+            <strong>Enfoque:</strong> proyectos reales, aprendizaje constante y buenas prácticas
+          </li>
+        </ul>
+      </Reveal>
+    </>
+  );
+
+  return (
+    <section className="section chapter" id="inicio">
+      <ChapterMark index={chapterIndex} label="Presentación" />
+      <ChapterSpread
+        left={left}
+        right={right}
+        leftClassName="chapter-spread-half--center"
+        rightClassName="chapter-spread-half--center"
+      />
+    </section>
+  );
+}
+
+export default Cover;

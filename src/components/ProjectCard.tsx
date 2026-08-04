@@ -1,3 +1,5 @@
+import Reveal from './Reveal';
+
 type ProjectCardProps = {
   title: string;
   subject?: string;
@@ -5,6 +7,7 @@ type ProjectCardProps = {
   stack: string[];
   linkLabel?: string;
   linkHref?: string;
+  delay?: number;
 };
 
 function ProjectCard({
@@ -14,9 +17,10 @@ function ProjectCard({
   stack,
   linkLabel,
   linkHref,
+  delay,
 }: ProjectCardProps) {
   return (
-    <article className="project-card reveal">
+    <Reveal as="article" className="project-card" delay={delay}>
       <div className="project-card-top">
         {subject ? <span className="project-subject">{subject}</span> : null}
         <h3>{title}</h3>
@@ -37,7 +41,7 @@ function ProjectCard({
           {linkLabel}
         </a>
       ) : null}
-    </article>
+    </Reveal>
   );
 }
 
