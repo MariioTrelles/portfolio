@@ -5,12 +5,12 @@ export type SkillGroup = {
 
 export const skillGroups: SkillGroup[] = [
   {
-    title: 'Frontend',
-    items: ['HTML', 'CSS', 'JavaScript', 'TypeScript', 'React', 'Vite'],
-  },
-  {
     title: 'Lenguajes',
     items: ['Java', 'Python', 'Rust', 'C++', 'C#'],
+  },
+  {
+    title: 'Frontend',
+    items: ['HTML', 'CSS', 'JavaScript', 'TypeScript', 'React', 'Vite'],
   },
   {
     title: 'Backend',

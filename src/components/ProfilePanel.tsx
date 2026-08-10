@@ -2,33 +2,25 @@ import Reveal from './Reveal';
 
 type ProfilePanelProps = {
   name: string;
-  role: string;
+  caption: string;
 };
 
-function ProfilePanel({ name, role }: ProfilePanelProps) {
+function ProfilePanel({ name, caption }: ProfilePanelProps) {
   const profileImage = `${import.meta.env.BASE_URL}images/nocheColiseo1.jpg`;
 
   return (
     <Reveal className="profile-panel">
-      <div className="profile-card">
-        <div className="profile-window-bar" aria-hidden="true">
-          <span />
-          <span />
-          <span />
-        </div>
-        <div className="profile-image-wrap">
-          <img src={profileImage} alt={name} />
-          <div className="profile-overlay">
-            <p>{name}</p>
-            <span>{role}</span>
+      <figure className="profile-plate">
+        <div className="profile-card">
+          <div className="profile-image-wrap">
+            <img src={profileImage} alt={name} />
           </div>
         </div>
-      </div>
 
-      <div className="profile-caption">
-        <h1 className="profile-caption-name">{name}</h1>
-        <p className="profile-caption-role">{role}</p>
-      </div>
+        <figcaption className="profile-plate-caption">
+          <span className="profile-plate-label">{caption}</span>
+        </figcaption>
+      </figure>
     </Reveal>
   );
 }
