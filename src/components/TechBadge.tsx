@@ -1,46 +1,19 @@
+import type { CSSProperties } from 'react';
+import { getTechIcon } from '../data/techIcons';
+
 type TechBadgeProps = {
   name: string;
 };
 
-function getTechMark(name: string) {
-  const marks: Record<string, string> = {
-    Java: 'J',
-    Python: 'Py',
-    Rust: 'Rs',
-    'C++': 'C++',
-    'C#': 'C#',
-    TypeScript: 'TS',
-    JavaScript: 'JS',
-    HTML: 'H',
-    CSS: 'CSS',
-    XML: 'XML',
-    XSD: 'XSD',
-    React: 'R',
-    Vite: 'V',
-    'Node.js': 'N',
-    Express: 'Ex',
-    'Spring Boot': 'SB',
-    'Spring MVC': 'MVC',
-    'Spring Security': 'Sec',
-    Thymeleaf: 'Th',
-    Docker: 'D',
-    Git: 'Git',
-    GitHub: 'GH',
-    Maven: 'M',
-    JPA: 'JPA',
-    SQL: 'SQL',
-  };
-
-  return marks[name] ?? name.slice(0, 2);
-}
-
 function TechBadge({ name }: TechBadgeProps) {
+  const { icon: Icon, color } = getTechIcon(name);
+
   return (
-    <div className="tech-badge">
-      <span className="tech-badge-mark" aria-hidden="true">
-        {getTechMark(name)}
+    <div className="tech-badge" style={{ '--tech-color': color } as CSSProperties}>
+      <span className="tech-badge-icon" aria-hidden="true">
+        <Icon />
       </span>
-      <span>{name}</span>
+      <span className="tech-badge-name">{name}</span>
     </div>
   );
 }

@@ -10,9 +10,10 @@ type CoverProps = {
   role: string;
   summary: string;
   secondaryLink: string;
+  onViewProjects: () => void;
 };
 
-function Cover({ chapterIndex, name, role, summary, secondaryLink }: CoverProps) {
+function Cover({ chapterIndex, name, role, summary, secondaryLink, onViewProjects }: CoverProps) {
   const left = <ProfilePanel name={name} role={role} />;
 
   const right = (
@@ -24,6 +25,9 @@ function Cover({ chapterIndex, name, role, summary, secondaryLink }: CoverProps)
           <a className="button button-primary" href={secondaryLink} target="_blank" rel="noreferrer">
             Descargar CV
           </a>
+          <button type="button" className="button button-secondary" onClick={onViewProjects}>
+            Ver proyectos
+          </button>
         </div>
       </Reveal>
 

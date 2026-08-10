@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import ChapterMark from '../components/ChapterMark';
 import ChapterSpread from '../components/ChapterSpread';
 import Reveal from '../components/Reveal';
@@ -6,47 +6,55 @@ import SectionTitle from '../components/SectionTitle';
 import TechBadge from '../components/TechBadge';
 import { skillGroups, type SkillGroup } from '../data/skills';
 
+const MARQUEE_SPEED = 55; // px por segundo, igual para todas las filas
+
 type SkillRailProps = {
   group: SkillGroup;
   delay?: number;
+  reverse?: boolean;
 };
 
-function SkillRail({ group, delay }: SkillRailProps) {
-  const railRef = useRef<HTMLDivElement>(null);
+function SkillRail({ group, delay, reverse }: SkillRailProps) {
+  const trackRef = useRef<HTMLDivElement>(null);
+  const [duration, setDuration] = useState(() => group.items.length * 2.2);
 
-  const scrollRail = (direction: -1 | 1) => {
-    railRef.current?.scrollBy({
-      left: direction * 260,
-      behavior: 'smooth',
-    });
-  };
+  useEffect(() => {
+    const track = trackRef.current;
+    if (!track) return;
+
+    const updateDuration = () => {
+      const setWidth = track.scrollWidth / 2;
+      if (setWidth > 0) setDuration(setWidth / MARQUEE_SPEED);
+    };
+
+    updateDuration();
+
+    const observer = new ResizeObserver(updateDuration);
+    observer.observe(track);
+    return () => observer.disconnect();
+  }, [group.items]);
 
   return (
     <Reveal as="article" className="skill-group skill-rail-group" delay={delay}>
       <div className="skill-rail-header">
         <h3>{group.title}</h3>
-        <div className="skill-rail-controls" aria-label={`Controles de ${group.title}`}>
-          <button
-            type="button"
-            aria-label={`Ver tecnologías anteriores de ${group.title}`}
-            onClick={() => scrollRail(-1)}
-          >
-            &lt;
-          </button>
-          <button
-            type="button"
-            aria-label={`Ver más tecnologías de ${group.title}`}
-            onClick={() => scrollRail(1)}
-          >
-            &gt;
-          </button>
-        </div>
       </div>
 
-      <div className="skills-row-scroll" ref={railRef} aria-label={group.title}>
-        {group.items.map((item) => (
-          <TechBadge key={item} name={item} />
-        ))}
+      <div className="skills-row-scroll">
+        <span className="sr-only">{group.items.join(', ')}</span>
+        <div
+          ref={trackRef}
+          className="skills-marquee-track"
+          aria-hidden="true"
+          style={{
+            animationDuration: `${duration}s`,
+            animationDirection: reverse ? 'reverse' : 'normal',
+          }}
+        >
+          {[...group.items, ...group.items].map((item, index) => (
+            <TechBadge key={`${item}-${index}`} name={item} />
+          ))}
+        </div>
       </div>
     </Reveal>
   );
@@ -64,14 +72,19 @@ function Skills({ chapterIndex }: SkillsProps) {
       index={chapterIndex}
       title="Tecnologías y herramientas"
       description="Tecnologías y conceptos que ya he trabajado durante el grado y que quiero seguir consolidando en un entorno profesional. Abarcan desde el lenguaje y la arquitectura hasta el testing y el despliegue, con especial interés en las buenas prácticas."
-      stats={`+50 tecnologías`}
+      stats={`+${Math.floor(totalSkills / 10) * 10} tecnologías`}
     />
   );
 
   const right = (
     <div className="skills-groups">
       {skillGroups.map((group, index) => (
-        <SkillRail group={group} key={group.title} delay={Math.min(index * 0.06, 0.3)} />
+        <SkillRail
+          group={group}
+          key={group.title}
+          delay={Math.min(index * 0.06, 0.3)}
+          reverse={index % 2 === 1}
+        />
       ))}
     </div>
   );

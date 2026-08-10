@@ -15,4 +15,12 @@ export const trainingItems: Training[] = [
     linkLabel: 'Ver certificado',
     linkHref: 'cv/certificadoIA.pdf',
   },
+  {
+    title: 'B2 Certificate in English',
+    category: 'Cambridge English',
+    description:
+      'Certificado oficial de Cambridge que acredita un nivel B2 de inglés, cubriendo comprensión oral y escrita, expresión y uso del idioma en contextos académicos y profesionales.',
+    linkLabel: 'Ver certificado',
+    linkHref: 'cv/B2-Certificate-Cambridge-English.pdf',
+  },
 ];

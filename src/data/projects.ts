@@ -45,12 +45,3 @@ export const universityProjects: Project[] = [
     linkHref: 'https://github.com/MariioTrelles/sew-web',
   },
 ];
-
-export const personalProjects: Project[] = [
-  {
-    title: 'Próximamente',
-    description:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Esta sección queda reservada para futuros proyectos personales.',
-    stack: ['Pendiente'],
-  },
-];

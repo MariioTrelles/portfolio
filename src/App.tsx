@@ -9,13 +9,12 @@ import Projects from './sections/Projects';
 import Training from './sections/Training';
 import usePager from './hooks/usePager';
 import { personalInfo } from './data/personal';
-import { personalProjects, universityProjects } from './data/projects';
+import { universityProjects } from './data/projects';
 
 const CHAPTER_META = [
   { id: 'inicio', label: 'Inicio' },
   { id: 'tecnologias', label: 'Tecnologías' },
-  { id: 'projects-university', label: 'Proyectos universitarios' },
-  { id: 'projects', label: 'Proyectos personales' },
+  { id: 'projects', label: 'Proyectos' },
   { id: 'formacion', label: 'Formación' },
 ] as const;
 
@@ -36,40 +35,28 @@ function App() {
             role={personalInfo.role}
             summary={personalInfo.summary}
             secondaryLink={cvPath}
+            onViewProjects={() => pager.goTo(CHAPTER_IDS.indexOf('projects'))}
           />
         ),
       },
       { id: 'tecnologias', node: <Skills chapterIndex={2} /> },
       {
-        id: 'projects-university',
+        id: 'projects',
         node: (
           <Projects
             chapterIndex={3}
-            id="projects-university"
-            chapterLabel="Proyectos universitarios"
-            title="Proyectos universitarios"
+            id="projects"
+            chapterLabel="Proyectos"
+            title="Proyectos"
             intro="Una selección de trabajos que reflejan una base sólida en ingeniería del software, desarrollo web, datos y despliegue. Incluyen tanto desarrollos en equipo como proyectos individuales a lo largo del grado."
             stats="4 proyectos · individuales y en equipo"
             projects={universityProjects}
           />
         ),
       },
-      {
-        id: 'projects',
-        node: (
-          <Projects
-            chapterIndex={4}
-            id="projects"
-            chapterLabel="Proyectos personales"
-            title="Proyectos personales"
-            intro="Pequeños proyectos orientados a seguir aprendiendo, construir presencia profesional y aplicar buenas prácticas fuera del aula. Un espacio que iré ampliando según vaya cerrando nuevas ideas."
-            projects={personalProjects}
-          />
-        ),
-      },
-      { id: 'formacion', node: <Training chapterIndex={5} /> },
+      { id: 'formacion', node: <Training chapterIndex={4} /> },
     ],
-    [cvPath],
+    [cvPath, pager.goTo],
   );
 
   return (
